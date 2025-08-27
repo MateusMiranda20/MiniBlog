@@ -76,23 +76,24 @@ export const useAuthentication = () =>{
         checkIfIsCancelled()
 
         setLoading(true)
-        setError(false)
+        setError(null)
 
         try {
            await signInWithEmailAndPassword( auth, data.email, data.password )
+           setLoading(false)
         } catch (error) {
             
             let systemErrorMessage 
-
-            if(error.message.includes("user-not-found")){
-                systemErrorMessage = "Usuário não encontrado"
-            } else if (error.message.includes("wrong-password" )){
-                systemErrorMessage = "Senha ou Email incorreto";
+        
+            if(error.message.includes("invalid-credential")){
+                systemErrorMessage = "Usuário ou senha inválidos."
             } else {
-                systemErrorMessage = "Ocorreu um erro, por favor volte mais tarde"
+                systemErrorMessage = "Ocorreu um erro, por favor tente mais tarde."
             }
-            setLoading(false)
+            
             setError(systemErrorMessage)
+            
+        setLoading(false)
         }
     }
 
