@@ -16,33 +16,30 @@ function CreatePost() {
 
     const { insertDocument, response } = useInsertDocument("posts")
 
+     const navigate = useNavigate()
+
     const handleSubmit = (e) => {
         e.preventDefault()
         setFormError("")
 
-        const tagsArray = tags.split(",").map(tag => tag.trim().toLowerCase())
+        const tagsArray = tags.split(",").map((tag) => tag.trim().toLowerCase())
 
-
-        //Validate image URL
-        if (!image.match(/\.(jpeg|jpg|gif|png)$/)) {
-            setFormError("Por favor, insira uma URL de imagem válida.")
+        //Checar todos os valores
+        if (!title || !image || !body || tagsArray.length === 0) {
+            setFormError("Por favor, preencha todos os campos.")
             return
         }
 
+        //Validate image URL
+        try {
+            new URL(image)
+        } catch (error) {
+            setFormError("Por favor, insira uma URL de imagem válida." + error)
+        }
 
-        //Chamar a função de inserção de documento
-        //insertDocument({
-        //   title,
-        //  image,
-        // body,
-        // tags: tagsArray
-        //});
+        if (formError) return;
 
-        //Checar todos os valores
-        //if (!title || !image || !body || tagsArray.length === 0) {
-        //  setFormError("Por favor, preencha todos os campos.")
-        //  return
-        //}
+
 
         insertDocument({
             title,
@@ -53,6 +50,7 @@ function CreatePost() {
             createdBy: user.displayName
         })
 
+        navigate("/")
     }
 
 
@@ -105,7 +103,7 @@ function CreatePost() {
                     />
                 </label>
                 {!response.loading && <button className="btn">Cadastrar</button>}
-                {response.loading &&(
+                {response.loading && (
                     <button className="btn" disabled>
                         Aguarde...
                     </button>
