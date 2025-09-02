@@ -9,7 +9,7 @@ import { useAuthentication } from './hooks/useAuthentication';
 
 import { AuthProvider } from "./context/AuthContext"
 
-import Home from './pages/Home/home';
+import Home from './pages/Home/Home';
 import About from './pages/About/About';
 import Login from './pages/Login/Login'
 import Register from './pages/Register/Register'
@@ -17,6 +17,7 @@ import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import CreatePost from './pages/CreatePost/CreatePost';
 import Dashboard from './pages/Dashbord/Dashboard';
+import Search from './pages/Search/Search';
 
 function App() {
 
@@ -47,6 +48,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
+            <Route path="/search" element={<Search />} />
 
             <Route path="/register" element={!user ? <Register /> : <Navigate to="/" />} />
 
