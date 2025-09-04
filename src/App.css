@@ -99,7 +99,8 @@ textarea {
 }
 
 .btn.btn-outline:hover{
-  background-color: #000;
+  background-color: #0f730c;
+  color: #fff;
 }
 
 .btn.btn-danger:hover{
