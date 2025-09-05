@@ -6,7 +6,7 @@ import {useState, useEffect} from "react"
 function Login() {
 
     const [email, setEmail] = useState("")
-    const [password, setPassaword] = useState("")
+    const [password, setPassword] = useState("")
     const [error, setError] = useState("")
   
     const { login, error: authError, loading} = useAuthentication()
@@ -35,7 +35,7 @@ function Login() {
 
   return (
     <div className={styles.login}>
-       <h1>Entrar</h1>
+      <h1>Entrar</h1>
       <p>Faça o Login</p>
       <form onSubmit={handleSubmit}>
         <label>
@@ -55,7 +55,7 @@ function Login() {
             required
             placeholder="Insira sua senha" 
             value={password}
-            onChange={(e) => setPassaword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             />
         </label>
         {!loading && <button className="btn">Entrar</button>}
