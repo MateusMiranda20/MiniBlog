@@ -5,7 +5,6 @@ import { useFetchDocument } from '../../hooks/useFetchDocument'
 
 function Post() {
     const { id } = useParams()
-    console.log('ID recebido', id)
     const { document: post, loading, } = useFetchDocument('posts',id)
 
     return (
