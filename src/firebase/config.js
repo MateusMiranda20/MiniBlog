@@ -1,23 +1,20 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-// TODO: Add SDKs for Firebase products that you want to use
 
+// Configuração do Firebase usando variáveis de ambiente no Vite
 const firebaseConfig = {
-    apiKey: "AIzaSyAkTngslonyv0L0e2CQ9FtqYjFUcQZMP8M",
-    authDomain: "miniblog-3a632.firebaseapp.com",
-    projectId: "miniblog-3a632",
-    storageBucket: "miniblog-3a632.firebasestorage.app",
-    messagingSenderId: "1056938649440",
-    appId: "1:1056938649440:web:b0d32f1c6732d0b94c6005"
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
-
+// Inicializa o Firebase
 const app = initializeApp(firebaseConfig);
-
 const db = getFirestore(app);
+const auth = getAuth(app);
 
-const auth = getAuth(app)
-
-export { db, auth, app }; // Export the Firestore database instance
+export { db, auth, app };
