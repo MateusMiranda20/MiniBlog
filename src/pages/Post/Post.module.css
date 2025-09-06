@@ -22,3 +22,7 @@
 .tags span {
     font-weight: bolder;
 }
+
+.body{
+    padding: 0 11em;
+}
