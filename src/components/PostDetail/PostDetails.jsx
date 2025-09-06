@@ -11,8 +11,8 @@ const PostDetails = ({ post }) => {
             <h2>{post.title}</h2>
             <p className={styles.createdby}>{post.createBody}</p>
             <div className={styles.tags}>
-                {post.tagsArray && post.tagsArray.map((tag) => (
-                    <span key={tag} className={styles.tag}>{tag}</span>
+                {post.tags && post.tags.map((tag) => (
+                    <p key={tag} className={styles.tag}> <span>#</span>{tag}</p>
                 ))}
             </div>
             <Link to={`/posts/${post.id}`} className='btn btn-outline'>Ver Post</Link>
