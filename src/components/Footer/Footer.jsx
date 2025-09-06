@@ -5,6 +5,7 @@ const Footer = () => {
         <footer className={styles.footer}>
             <h3>Escreva sobre o que você tem interesse!!</h3>
             <p>Mini Blog & copy 2025</p>
+            <p>Feito por Mateus Miranda</p>
         </footer>
     )
 }
