@@ -25,20 +25,40 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
             const collectionRef = await collection(db, docCollection)
 
             try {
-                let q
+                let q;
+
                 if (search) {
-                    q = await query(collectionRef, where('tagsArray', 'array-contains', search), orderBy('createdAt', 'desc'))
+                const searchLower = search.toLowerCase(); // transforma a busca em minúscula
+
+                // Busca por tags exatas (array-contains) e padronizando tudo em minúscula
+                q = query(
+                    collectionRef,
+                    where("tags", "array-contains", searchLower),
+                    orderBy("createdAt", "desc")
+                );
+
                 } else if (uid) {
-                    q = await query(collectionRef, where('uid', '==', uid), orderBy('createdAt', 'desc'))
-                }else {
-                    q = await query(collectionRef, orderBy('createdAt', 'desc'))
+                q = query(
+                    collectionRef,
+                    where("uid", "==", uid),
+                    orderBy("createdAt", "desc")
+                );
+                } else {
+                q = query(collectionRef, orderBy("createdAt", "desc"));
                 }
 
-                await onSnapshot(q, (querySnapshot) => {
-                    setDocuments(
-                        querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-                    )
-                })
+                console.log("search:", search);
+                console.log("collectionRef:", collectionRef);
+
+                onSnapshot(q, (querySnapshot) => {
+                setDocuments(
+                    querySnapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data(),
+                    }))
+                );
+                });
+
 
                 setLoading(false)
             } catch (error) {
